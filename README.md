@@ -1,5 +1,4 @@
-[TODO: Replace with your Netflify status badge]
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3b3dacd1-eb12-49d8-acf5-399975f3030d/deploy-status)](https://app.netlify.com/sites/maymesbakerya/deploys)
 # JavaScript Assessment
 
 For your unit 3 assessment you are required to work with your study group as an agile team to create an animated interactive timeline for Mayme's Bakery. The interactivity (behaviour/actions) of timeline should be agreed upon by all group members.
