@@ -3,42 +3,80 @@ import { dates } from "./data.js";
 export default function createTimelineList(dates) {
   const timeline = document.querySelector(".timeline");
 
-  /* Title for Page */
+  /* Create title for page inside a header element (header with h1 element) */
+  const pageHeader = document.createElement("header");
   const title = document.createElement("h1");
   const pageTitleText = document.createTextNode("History of Baking Timeline");
-  const wrapper = document.createElement("section");
+  title.appendChild(pageTitleText);
+  pageHeader.appendChild(title);
+
+  /* Insert header to the top of the body */
+  document.body.insertBefore(pageHeader, timeline);
+
+  /* Create wrapper for the timeline (section with class .timeline-wrapper) */
+  const timelineWrapper = document.createElement("section");
+  timelineWrapper.setAttribute("class", "timeline-wrapper");
+
+  /* Create the gradient line in the centre of the timeline (div with class .centre-line) */
+  const timelineCentreLine = document.createElement("div");
+  timelineCentreLine.setAttribute("class", "centre-line");
+  /* Insert .centre-line inside .timeline-wrapper */
+  timelineWrapper.appendChild(timelineCentreLine);
 
   // The Loop
   dates.map((dates) => {
-    const timelineItemWrapper = document.createElement("div");
-    timelineItemWrapper.className = "timeline-item";
+    /* Create a row for each timeline item (div with class .row) */
+    const timelineRow = document.createElement("div");
+    timelineRow.setAttribute("class", "row");
+
+    // Timeline Item
+    const timelineItem = document.createElement("div");
+    timelineItem.className = "timeline-item";
+
+    /* Create icon for each timeline item (i with classes .icon .fas .fa-caret-down) */
+    const timelineIcon = document.createElement("i");
+    timelineIcon.setAttribute("class", "icon fas fa-caret-down");
+    /* Insert icon into each timeline item */
+    timelineItem.appendChild(timelineIcon);
+
+    /* Create a wrapper for the timeline title and date (div with class .timeline-summary-header) */
+    const timelineSummaryHeader = document.createElement("div");
+    timelineSummaryHeader.setAttribute("class", "timeline-summary-header");
 
     // Title
     const timelineItemTitle = document.createElement("h2");
     timelineItemTitle.className = "timeline-item-title";
     timelineItemTitle.textContent = dates.title;
-    timelineItemWrapper.appendChild(timelineItemTitle);
+    timelineSummaryHeader.appendChild(timelineItemTitle);
 
     // Date
     const timelineItemDate = document.createElement("span");
     timelineItemDate.className = "timeline-item-date";
     timelineItemDate.textContent = dates.date;
-    timelineItemWrapper.appendChild(timelineItemDate);
+    timelineSummaryHeader.appendChild(timelineItemDate);
+
+    /* Insert the .timeline-summary-header into the .timeline-item */
+    timelineItem.appendChild(timelineSummaryHeader);
 
     // Summary
     const timelineItemSummary = document.createElement("p");
     timelineItemSummary.className = "timeline-item-summary";
     timelineItemSummary.textContent = dates.summary;
-    timelineItemWrapper.appendChild(timelineItemSummary);
+    timelineItem.appendChild(timelineItemSummary);
 
     // Button
     const timelineItemBT = document.createElement("button");
     timelineItemBT.className = "timeline-item-more-info";
     timelineItemBT.textContent = "Read More";
-    timelineItemWrapper.appendChild(timelineItemBT);
+    timelineItem.appendChild(timelineItemBT);
     timelineItemBT.addEventListener("click", openModal);
 
-    wrapper.appendChild(timelineItemWrapper);
+    /* Insert .timeline-item into .row */
+    timelineRow.appendChild(timelineItem);
+
+    /* Insert .row into .timeline-wrapper */
+    timelineWrapper.appendChild(timelineRow);
+    
     const modalWrapper = document.createElement("div");
 
     function openModal() {
@@ -93,9 +131,7 @@ export default function createTimelineList(dates) {
     }
   });
 
-  title.appendChild(pageTitleText);
-  timeline.appendChild(title);
-  timeline.appendChild(wrapper);
+  timeline.appendChild(timelineWrapper);
 }
 
 // Call the function
