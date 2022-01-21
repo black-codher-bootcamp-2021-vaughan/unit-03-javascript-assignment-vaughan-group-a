@@ -91,7 +91,7 @@ export default function createTimelineList(dates) {
       const modalCloseButton = document.createElement("button");
       modalCloseButton.setAttribute("id", "modal-close-button");
       modalCloseButton.setAttribute("type", "reset");
-      modalCloseButton.textContent = "Close";
+      modalCloseButton.textContent = "X";
       modalContainer.appendChild(modalCloseButton);
       modalCloseButton.addEventListener("click", closeModal);
 
@@ -128,6 +128,7 @@ export default function createTimelineList(dates) {
     }
     function closeModal() {
       document.body.removeChild(modalWrapper);
+      modalWrapper.innerHTML ="";
     }
   });
 
